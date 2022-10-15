@@ -8,16 +8,18 @@
     .container {
       margin: auto;
       width: 100%;
+      padding: 10%;
     }
 
     .container > svg {
-      width: 100%;
-      height: 100%;
+      width: 80%;
+      height: 80%;
     }
   </style>
 </head>
 <body>
 <div class="container">
+  <input type="range" min="0" max="360" value="0" class="slider" id="myRange" oninput="rotate(this.value)" onchange="rotate(this.value)">
   <svg id="svg" xmlns="http://www.w3.org/2000/svg"></svg>
 </div>
 </body>
@@ -28,6 +30,11 @@
   const colornone = "#ddd";
   const colorselected = "#000";
   const colorunselected = "#999";
+
+  function rotate(value) {
+    document.getElementById("svg").style.msTransform="rotate(" + value + "deg)";
+    document.getElementById("svg").style.transform="rotate(" + value + "deg)";
+  }
 
   function bilink(root) {
     const map = new Map(root.leaves().map(d => [d.data.id, d]));
@@ -99,7 +106,7 @@
 
     svg.append("g")
       .attr("font-family", "sans-serif")
-      .attr("font-size", 10)
+      .attr("font-size", 12)
       .selectAll("g")
       .data(root.leaves())
       .join("g")
